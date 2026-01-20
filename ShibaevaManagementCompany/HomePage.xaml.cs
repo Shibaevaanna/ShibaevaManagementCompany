@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -27,19 +26,15 @@ namespace ShibaevaManagementCompany.Pages
             {
                 using (var db = new DatabaseContext())
                 {
-                    // Подсчет домов
                     int totalBuildings = db.Buildings.Count();
                     txtTotalBuildings.Text = totalBuildings.ToString();
 
-                    // Подсчет квартир
                     int totalApartments = db.Apartments.Count();
                     txtTotalApartments.Text = totalApartments.ToString();
 
-                    // Подсчет заявок
                     int totalRequests = db.ServiceRequests.Count();
                     txtTotalRequests.Text = totalRequests.ToString();
 
-                    // Подсчет сотрудников
                     int totalEmployees = db.Employees.Count();
                     txtTotalEmployees.Text = totalEmployees.ToString();
                 }

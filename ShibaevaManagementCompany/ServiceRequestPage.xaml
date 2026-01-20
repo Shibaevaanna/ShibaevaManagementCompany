@@ -1,0 +1,170 @@
+﻿<Page x:Class="ShibaevaManagementCompany.Pages.ServiceRequestsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Заявки на ремонт">
+
+    <Grid Background="{StaticResource WhiteColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Border Grid.Row="0" Padding="30,20" Background="{StaticResource SecondaryColor}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Заявки на ремонт" 
+                              Style="{StaticResource PageTitleStyle}"/>
+                    <TextBlock x:Name="txtFilterInfo" 
+                              Style="{StaticResource PageSubtitleStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button x:Name="btnAddRequest" 
+                           Content="+ Новая заявка" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnAddRequest_Click"/>
+
+                    <Button Content="Обновить" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnRefresh_Click"/>
+
+                    <Button Content="Назад" 
+                           Style="{StaticResource SecondaryButtonStyle}"
+                           Click="BtnBack_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Фильтры -->
+        <Border Grid.Row="1" Margin="30,15,30,15" Style="{StaticResource FilterPanelStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="Статус:" 
+                              VerticalAlignment="Center"
+                              Margin="0,0,10,0"/>
+
+                    <ComboBox x:Name="cbStatusFilter" 
+                             Width="150" 
+                             SelectionChanged="CbStatusFilter_SelectionChanged">
+                        <ComboBoxItem Content="Все" IsSelected="True"/>
+                        <ComboBoxItem Content="Новая"/>
+                        <ComboBoxItem Content="В работе"/>
+                        <ComboBoxItem Content="Завершена"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Адрес:" 
+                              VerticalAlignment="Center"
+                              Margin="20,0,10,0"/>
+
+                    <TextBox x:Name="txtAddressFilter" 
+                            Width="300" 
+                            TextChanged="TxtAddressFilter_TextChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Content="Сегодня" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnToday_Click"/>
+
+                    <Button Content="Неделя" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnWeek_Click"/>
+
+                    <Button Content="Месяц" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnMonth_Click"/>
+
+                    <Button Content="Только новые" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnOnlyNew_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Таблица заявок -->
+        <DataGrid x:Name="dgRequests" 
+                 Grid.Row="2"
+                 Margin="30,0,30,30"
+                 SelectionChanged="DgRequests_SelectionChanged"
+                 MouseDoubleClick="DgRequests_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" 
+                                  Binding="{Binding RequestID}" 
+                                  Width="60"/>
+                <DataGridTextColumn Header="Адрес" 
+                                  Binding="{Binding Apartments.Buildings.Address}" 
+                                  Width="200"/>
+                <DataGridTextColumn Header="Квартира" 
+                                  Binding="{Binding Apartments.ApartmentNumber}" 
+                                  Width="80"/>
+                <DataGridTextColumn Header="Владелец" 
+                                  Binding="{Binding Apartments.OwnerName}" 
+                                  Width="150"/>
+                <DataGridTextColumn Header="Телефон" 
+                                  Binding="{Binding Apartments.PhoneNumber}" 
+                                  Width="100"/>
+                <DataGridTextColumn Header="Описание" 
+                                  Binding="{Binding Description}" 
+                                  Width="*"/>
+                <DataGridTextColumn Header="Исполнитель" 
+                                  Binding="{Binding Employees.FullName}" 
+                                  Width="150"/>
+                <DataGridTemplateColumn Header="Статус" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Padding="5,2" 
+                                   Background="{Binding Status, Converter={StaticResource StatusColorConverter}}">
+                                <TextBlock Text="{Binding Status}" 
+                                          HorizontalAlignment="Center"
+                                          Foreground="{StaticResource WhiteColor}"
+                                          FontWeight="Bold"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Дата заявки" 
+                                  Binding="{Binding RequestDate, StringFormat=dd.MM.yyyy}" 
+                                  Width="100"/>
+                <DataGridTextColumn Header="Дата завершения" 
+                                  Binding="{Binding CompletionDate, StringFormat=dd.MM.yyyy}" 
+                                  Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Панель действий -->
+        <Border Grid.Row="3" Background="{StaticResource WhiteColor}" Padding="15">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnEdit" 
+                       Content="Редактировать" 
+                       Style="{StaticResource PrimaryButtonStyle}"
+                       Click="BtnEdit_Click"
+                       IsEnabled="False"/>
+
+                <Button x:Name="btnDelete" 
+                       Content="Удалить" 
+                       Style="{StaticResource ErrorButtonStyle}"
+                       Click="BtnDelete_Click"
+                       IsEnabled="False"/>
+
+                <Button x:Name="btnViewHistory" 
+                       Content="История" 
+                       Style="{StaticResource PrimaryButtonStyle}"
+                       Click="BtnViewHistory_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

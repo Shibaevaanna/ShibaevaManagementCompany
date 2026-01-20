@@ -1,8 +1,7 @@
-﻿using ShibaevaManagementCompany.Pages;
-using System.Threading;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ShibaevaManagementCompany.Pages;
 
 namespace ShibaevaManagementCompany
 {
@@ -46,17 +45,24 @@ namespace ShibaevaManagementCompany
 
         private void UpdateButtonStates(Button activeButton)
         {
-            
             btnHome.Background = Brushes.Transparent;
-            btnBuildings.Background = Brushes.Transparent;
-            btnApartments.Background = Brushes.Transparent;
-            btnServiceRequests.Background = Brushes.Transparent;
-            btnRequestHistory.Background = Brushes.Transparent;
+            btnHome.Foreground = (SolidColorBrush)FindResource("TextColor");
 
-            
+            btnBuildings.Background = Brushes.Transparent;
+            btnBuildings.Foreground = (SolidColorBrush)FindResource("TextColor");
+
+            btnApartments.Background = Brushes.Transparent;
+            btnApartments.Foreground = (SolidColorBrush)FindResource("TextColor");
+
+            btnServiceRequests.Background = Brushes.Transparent;
+            btnServiceRequests.Foreground = (SolidColorBrush)FindResource("TextColor");
+
+            btnRequestHistory.Background = Brushes.Transparent;
+            btnRequestHistory.Foreground = (SolidColorBrush)FindResource("TextColor");
+
             if (activeButton != null)
             {
-                activeButton.Background = new SolidColorBrush(Color.FromRgb(103, 186, 128)); // #67BA80
+                activeButton.Background = (SolidColorBrush)FindResource("PrimaryColor");
                 activeButton.Foreground = Brushes.White;
             }
         }

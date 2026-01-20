@@ -1,0 +1,103 @@
+﻿<Page x:Class="ShibaevaManagementCompany.Pages.ApartmentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Квартиры">
+
+    <Grid Background="{StaticResource WhiteColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Border Grid.Row="0" Padding="30,20" Background="{StaticResource SecondaryColor}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Квартиры" 
+                              Style="{StaticResource PageTitleStyle}"/>
+                    <TextBlock x:Name="txtFilterInfo" 
+                              Style="{StaticResource PageSubtitleStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button x:Name="btnShowAll" 
+                           Content="Все квартиры" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnShowAll_Click"/>
+
+                    <Button Content="Обновить" 
+                           Style="{StaticResource PrimaryButtonStyle}"
+                           Click="BtnRefresh_Click"/>
+
+                    <Button Content="Назад" 
+                           Style="{StaticResource SecondaryButtonStyle}"
+                           Click="BtnBack_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Содержимое -->
+        <Grid Grid.Row="1" Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Фильтры -->
+            <Border Grid.Row="0" Style="{StaticResource FilterPanelStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Поиск:" 
+                              VerticalAlignment="Center"
+                              Margin="0,0,10,0"/>
+
+                    <TextBox x:Name="txtSearch" 
+                            Grid.Column="1" 
+                            TextChanged="TxtSearch_TextChanged"/>
+
+                    <ComboBox x:Name="cbBuildingFilter" 
+                             Grid.Column="2"
+                             Width="300"
+                             Margin="10,0,0,0"
+                             DisplayMemberPath="Address"
+                             SelectedValuePath="BuildingID"
+                             SelectionChanged="CbBuildingFilter_SelectionChanged">
+                        <ComboBoxItem Content="Все дома" IsSelected="True"/>
+                    </ComboBox>
+                </Grid>
+            </Border>
+
+            <!-- Таблица квартир -->
+            <DataGrid x:Name="dgApartments" 
+                     Grid.Row="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" 
+                                      Binding="{Binding ApartmentID}" 
+                                      Width="50"/>
+                    <DataGridTextColumn Header="Адрес" 
+                                      Binding="{Binding Buildings.Address}" 
+                                      Width="250"/>
+                    <DataGridTextColumn Header="Квартира" 
+                                      Binding="{Binding ApartmentNumber}" 
+                                      Width="80"/>
+                    <DataGridTextColumn Header="Владелец" 
+                                      Binding="{Binding OwnerName}" 
+                                      Width="200"/>
+                    <DataGridTextColumn Header="Телефон" 
+                                      Binding="{Binding PhoneNumber}" 
+                                      Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

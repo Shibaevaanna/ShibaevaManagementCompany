@@ -3,84 +3,82 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Главная">
 
-    <Grid Background="White">
+    <Grid Background="{StaticResource WhiteColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Заголовок -->
-        <Border Grid.Row="0" Padding="30,20" Background="#F4E8D3" CornerRadius="10,10,0,0">
+        <Border Grid.Row="0" Padding="30,20" Background="{StaticResource SecondaryColor}">
             <TextBlock Text="Главная страница" 
-                      FontSize="28" 
-                      FontWeight="Bold"
-                      Foreground="#333333"/>
+                      Style="{StaticResource PageTitleStyle}"/>
         </Border>
 
         <!-- Содержимое -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="30" Spacing="20">
+            <StackPanel Margin="30">
 
                 <!-- Приветствие -->
-                <Border Background="#F9F9F9" CornerRadius="10" Padding="20">
+                <Border Style="{StaticResource SectionStyle}">
                     <StackPanel>
                         <TextBlock Text="Добро пожаловать!" 
-                                  FontSize="22" 
+                                  FontSize="{StaticResource XXLargeFontSize}" 
                                   FontWeight="SemiBold"
-                                  Margin="0,0,0,10"
-                                  Foreground="#333333"/>
+                                  Margin="0,0,0,10"/>
                         <TextBlock Text="Система управления жилым фондом управляющей компании" 
-                                  FontSize="16"
+                                  FontSize="{StaticResource LargeFontSize}"
                                   TextWrapping="Wrap"
-                                  Foreground="#666666"/>
+                                  Foreground="{StaticResource TextSecondaryColor}"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Быстрый доступ -->
-                <Border Background="#F9F9F9" CornerRadius="10" Padding="20">
+                <Border Style="{StaticResource SectionStyle}">
                     <StackPanel>
                         <TextBlock Text="Быстрый доступ" 
-                                  FontSize="20" 
+                                  FontSize="{StaticResource XLargeFontSize}" 
                                   FontWeight="SemiBold"
-                                  Margin="0,0,0,15"
-                                  Foreground="#333333"/>
+                                  Margin="0,0,0,15"/>
 
-                        <WrapPanel Spacing="15">
+                        <WrapPanel>
                             <Button Content="Жилой фонд" 
                                    Width="180" 
                                    Height="80"
-                                   FontSize="16"
-                                   Click="BtnQuickBuildings_Click"/>
+                                   FontSize="{StaticResource LargeFontSize}"
+                                   Click="BtnQuickBuildings_Click"
+                                   Margin="0,0,15,15"/>
 
                             <Button Content="Квартиры" 
                                    Width="180" 
                                    Height="80"
-                                   FontSize="16"
-                                   Click="BtnQuickApartments_Click"/>
+                                   FontSize="{StaticResource LargeFontSize}"
+                                   Click="BtnQuickApartments_Click"
+                                   Margin="0,0,15,15"/>
 
                             <Button Content="Заявки" 
                                    Width="180" 
                                    Height="80"
-                                   FontSize="16"
-                                   Click="BtnQuickRequests_Click"/>
+                                   FontSize="{StaticResource LargeFontSize}"
+                                   Click="BtnQuickRequests_Click"
+                                   Margin="0,0,15,15"/>
 
                             <Button Content="История" 
                                    Width="180" 
                                    Height="80"
-                                   FontSize="16"
+                                   FontSize="{StaticResource LargeFontSize}"
                                    Click="BtnQuickHistory_Click"/>
                         </WrapPanel>
                     </StackPanel>
                 </Border>
 
                 <!-- Статистика -->
-                <Border Background="#F9F9F9" CornerRadius="10" Padding="20">
+                <Border Style="{StaticResource SectionStyle}">
                     <StackPanel>
                         <TextBlock Text="Статистика" 
-                                  FontSize="20" 
+                                  FontSize="{StaticResource XLargeFontSize}" 
                                   FontWeight="SemiBold"
-                                  Margin="0,0,0,15"
-                                  Foreground="#333333"/>
+                                  Margin="0,0,0,15"/>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -91,81 +89,65 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- Дома -->
-                            <Border Grid.Column="0" 
-                                   Background="#67BA80" 
-                                   CornerRadius="5" 
-                                   Padding="15"
-                                   Margin="5">
+                            <Border Grid.Column="0" Style="{StaticResource StatBlockStyle}">
                                 <StackPanel>
                                     <TextBlock x:Name="txtTotalBuildings" 
                                               Text="0" 
                                               FontSize="32" 
                                               FontWeight="Bold"
-                                              Foreground="White"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                     <TextBlock Text="домов" 
-                                              FontSize="14"
-                                              Foreground="White"
+                                              FontSize="{StaticResource SmallFontSize}"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
 
                             <!-- Квартиры -->
-                            <Border Grid.Column="1" 
-                                   Background="#67BA80" 
-                                   CornerRadius="5" 
-                                   Padding="15"
-                                   Margin="5">
+                            <Border Grid.Column="1" Style="{StaticResource StatBlockStyle}">
                                 <StackPanel>
                                     <TextBlock x:Name="txtTotalApartments" 
                                               Text="0" 
                                               FontSize="32" 
                                               FontWeight="Bold"
-                                              Foreground="White"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                     <TextBlock Text="квартир" 
-                                              FontSize="14"
-                                              Foreground="White"
+                                              FontSize="{StaticResource SmallFontSize}"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
 
                             <!-- Заявки -->
-                            <Border Grid.Column="2" 
-                                   Background="#67BA80" 
-                                   CornerRadius="5" 
-                                   Padding="15"
-                                   Margin="5">
+                            <Border Grid.Column="2" Style="{StaticResource StatBlockStyle}">
                                 <StackPanel>
                                     <TextBlock x:Name="txtTotalRequests" 
                                               Text="0" 
                                               FontSize="32" 
                                               FontWeight="Bold"
-                                              Foreground="White"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                     <TextBlock Text="заявок" 
-                                              FontSize="14"
-                                              Foreground="White"
+                                              FontSize="{StaticResource SmallFontSize}"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
 
                             <!-- Сотрудники -->
-                            <Border Grid.Column="3" 
-                                   Background="#67BA80" 
-                                   CornerRadius="5" 
-                                   Padding="15"
-                                   Margin="5">
+                            <Border Grid.Column="3" Style="{StaticResource StatBlockStyle}">
                                 <StackPanel>
                                     <TextBlock x:Name="txtTotalEmployees" 
                                               Text="0" 
                                               FontSize="32" 
                                               FontWeight="Bold"
-                                              Foreground="White"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                     <TextBlock Text="сотрудников" 
-                                              FontSize="14"
-                                              Foreground="White"
+                                              FontSize="{StaticResource SmallFontSize}"
+                                              Foreground="{StaticResource WhiteColor}"
                                               HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
@@ -174,13 +156,12 @@
                 </Border>
 
                 <!-- Последние заявки -->
-                <Border Background="#F9F9F9" CornerRadius="10" Padding="20">
+                <Border Style="{StaticResource SectionStyle}">
                     <StackPanel>
                         <TextBlock Text="Последние заявки" 
-                                  FontSize="20" 
+                                  FontSize="{StaticResource XLargeFontSize}" 
                                   FontWeight="SemiBold"
-                                  Margin="0,0,0,15"
-                                  Foreground="#333333"/>
+                                  Margin="0,0,0,15"/>
 
                         <DataGrid x:Name="dgRecentRequests" 
                                  AutoGenerateColumns="False"
@@ -211,6 +192,7 @@
                         </DataGrid>
 
                         <Button Content="Все заявки" 
+                               Style="{StaticResource PrimaryButtonStyle}"
                                HorizontalAlignment="Right"
                                Margin="0,10,0,0"
                                Click="BtnAllRequests_Click"/>
