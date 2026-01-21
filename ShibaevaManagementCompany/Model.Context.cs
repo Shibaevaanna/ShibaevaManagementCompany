@@ -12,14 +12,21 @@ namespace ShibaevaManagementCompany
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Runtime.Remoting.Contexts;
+
     public partial class ShibaevaManagementCompanyEntities : DbContext
     {
         public ShibaevaManagementCompanyEntities()
-            : base("name=ShibaevaManagementCompanyEntities")
+             : base("name=AdsServiceShibaevaEntities")
         {
         }
-    
+        private static ShibaevaManagementCompanyEntities _context;
+
+        public static ShibaevaManagementCompanyEntities GetContext()
+        {
+            if (_context == null) _context = new ShibaevaManagementCompanyEntities();
+            return _context;
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -31,6 +38,6 @@ namespace ShibaevaManagementCompany
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<ServiceRequests> ServiceRequests { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<ы> sysdiagrams { get; set; }
     }
 }

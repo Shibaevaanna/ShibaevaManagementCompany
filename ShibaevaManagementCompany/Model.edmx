@@ -249,7 +249,7 @@
           <NavigationProperty Name="Apartments" Relationship="Self.FK__ServiceRe__Apart__6E01572D" FromRole="ServiceRequests" ToRole="Apartments" />
           <NavigationProperty Name="Employees" Relationship="Self.FK__ServiceRe__Emplo__6EF57B66" FromRole="ServiceRequests" ToRole="Employees" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="ы">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -326,7 +326,7 @@
           <EntitySet Name="Employees" EntityType="Self.Employees" />
           <EntitySet Name="Payments" EntityType="Self.Payments" />
           <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequests" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="sysdiagrams" EntityType="Model.ы" />
           <AssociationSet Name="FK__Apartment__Build__60A75C0F" Association="Self.FK__Apartment__Build__60A75C0F">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Apartments" EntitySet="Apartments" />
@@ -426,7 +426,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Model.sysdiagrams">
+            <EntityTypeMapping TypeName="Model.ы">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />

@@ -1,101 +1,50 @@
-﻿using System;
-using System.Linq;
+﻿using ShibaevaManagementCompany.Pages;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
+using System.Windows.Data;
 
-namespace ShibaevaManagementCompany.Pages
+namespace ShibaevaManagementCompany
 {
     public partial class HomePage : Page
     {
+        public class RecentRequest
+        {
+            public int RequestId { get; set; }
+            public string Address { get; set; }
+            public string Applicant { get; set; }
+            public string Status { get; set; }
+            public string Date { get; set; }
+        }
+
         public HomePage()
         {
             InitializeComponent();
-            Loaded += HomePage_Loaded;
-        }
-
-        private void HomePage_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadStatistics();
             LoadRecentRequests();
-        }
-
-        private void LoadStatistics()
-        {
-            try
-            {
-                using (var db = new DatabaseContext())
-                {
-                    int totalBuildings = db.Buildings.Count();
-                    txtTotalBuildings.Text = totalBuildings.ToString();
-
-                    int totalApartments = db.Apartments.Count();
-                    txtTotalApartments.Text = totalApartments.ToString();
-
-                    int totalRequests = db.ServiceRequests.Count();
-                    txtTotalRequests.Text = totalRequests.ToString();
-
-                    int totalEmployees = db.Employees.Count();
-                    txtTotalEmployees.Text = totalEmployees.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при загрузке статистики: {ex.Message}",
-                    "Ошибка",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-            }
         }
 
         private void LoadRecentRequests()
         {
-            try
+            var recentRequests = new List<RecentRequest>
             {
-                using (var db = new DatabaseContext())
-                {
-                    var recentRequests = db.ServiceRequests
-                        .Include("Apartments")
-                        .Include("Apartments.Buildings")
-                        .OrderByDescending(r => r.RequestDate)
-                        .Take(10)
-                        .ToList();
+                new RecentRequest { RequestId = 1001, Address = "ул. Ленина, д. 10, кв. 5", Applicant = "Иванов А.А.", Status = "В работе", Date = DateTime.Now.AddDays(-1).ToString("dd.MM.yyyy") },
+                new RecentRequest { RequestId = 1002, Address = "ул. Пушкина, д. 25, кв. 12", Applicant = "Петрова И.И.", Status = "Новая", Date = DateTime.Now.ToString("dd.MM.yyyy") },
+                new RecentRequest { RequestId = 1003, Address = "пр. Мира, д. 15, кв. 7", Applicant = "Сидоров В.В.", Status = "Выполнена", Date = DateTime.Now.AddDays(-3).ToString("dd.MM.yyyy") },
+                new RecentRequest { RequestId = 1004, Address = "ул. Гагарина, д. 8, кв. 3", Applicant = "Кузнецова О.П.", Status = "В работе", Date = DateTime.Now.AddDays(-2).ToString("dd.MM.yyyy") },
+                new RecentRequest { RequestId = 1005, Address = "ул. Советская, д. 30, кв. 9", Applicant = "Николаев С.М.", Status = "Новая", Date = DateTime.Now.ToString("dd.MM.yyyy") }
+            };
 
-                    dgRecentRequests.ItemsSource = recentRequests;
-                }
-            }
-            catch (Exception ex)
+            RecentRequestsGrid.ItemsSource = recentRequests;
+        }
+
+        private void NewRequest_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = Window.GetWindow(this) as MainWindow;
+            if (mainWindow != null)
             {
-                MessageBox.Show($"Ошибка при загрузке последних заявок: {ex.Message}",
-                    "Ошибка",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                mainWindow.MainFrame.Navigate(new ServiceRequestsPage());
             }
-        }
-
-        private void BtnQuickBuildings_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new BuildingsPage());
-        }
-
-        private void BtnQuickApartments_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new ApartmentsPage());
-        }
-
-        private void BtnQuickRequests_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new ServiceRequestsPage());
-        }
-
-        private void BtnQuickHistory_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new RequestHistoryPage());
-        }
-
-        private void BtnAllRequests_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new ServiceRequestsPage());
         }
     }
 }

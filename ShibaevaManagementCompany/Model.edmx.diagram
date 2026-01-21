@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="caba02d5667b4a99b140547a59e8cd2d" Name="Diagram1">
+      <Diagram DiagramId="caba02d5667b4a99b140547a59e8cd2d" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="Model.Apartments" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Buildings" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Debts" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Employees" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Payments" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ServiceRequests" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ы" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="Model.FK__Apartment__Build__60A75C0F" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Debts__Apartment__6477ECF3" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Payments__Apartm__6754599E" ManuallyRouted="false" />

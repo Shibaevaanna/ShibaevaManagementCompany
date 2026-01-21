@@ -1,7 +1,6 @@
-﻿using System.Windows;
+﻿using ShibaevaManagementCompany.Pages;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using ShibaevaManagementCompany.Pages;
 
 namespace ShibaevaManagementCompany
 {
@@ -10,86 +9,68 @@ namespace ShibaevaManagementCompany
         public MainWindow()
         {
             InitializeComponent();
-            NavigateToHome();
+            LoadHomePage();
         }
 
-        private void NavigateToHome()
+        private void LoadHomePage()
         {
             MainFrame.Navigate(new HomePage());
-            UpdateButtonStates(btnHome);
         }
 
-        private void NavigateToBuildings()
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new BuildingsPage());
-            UpdateButtonStates(btnBuildings);
+            MainFrame.Navigate(new HomePage());
         }
 
-        private void NavigateToApartments()
-        {
-            MainFrame.Navigate(new ApartmentsPage());
-            UpdateButtonStates(btnApartments);
-        }
-
-        private void NavigateToServiceRequests()
+        private void RequestsButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new ServiceRequestsPage());
-            UpdateButtonStates(btnServiceRequests);
         }
 
-        private void NavigateToRequestHistory()
+        private void HistoryButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new RequestHistoryPage());
-            UpdateButtonStates(btnRequestHistory);
         }
 
-        private void UpdateButtonStates(Button activeButton)
+        private void PaymentsButton_Click(object sender, RoutedEventArgs e)
         {
-            btnHome.Background = Brushes.Transparent;
-            btnHome.Foreground = (SolidColorBrush)FindResource("TextColor");
+            MessageBox.Show("Страница платежей в разработке", "Информация",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-            btnBuildings.Background = Brushes.Transparent;
-            btnBuildings.Foreground = (SolidColorBrush)FindResource("TextColor");
+        private void DebtsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Страница долгов в разработке", "Информация",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-            btnApartments.Background = Brushes.Transparent;
-            btnApartments.Foreground = (SolidColorBrush)FindResource("TextColor");
+        private void EmployeesButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Страница сотрудников в разработке", "Информация",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-            btnServiceRequests.Background = Brushes.Transparent;
-            btnServiceRequests.Foreground = (SolidColorBrush)FindResource("TextColor");
+        private void BuildingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Страница домов в разработке", "Информация",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-            btnRequestHistory.Background = Brushes.Transparent;
-            btnRequestHistory.Foreground = (SolidColorBrush)FindResource("TextColor");
+        private void ApartmentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Страница квартир в разработке", "Информация",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-            if (activeButton != null)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Вы действительно хотите выйти?", "Выход",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
             {
-                activeButton.Background = (SolidColorBrush)FindResource("PrimaryColor");
-                activeButton.Foreground = Brushes.White;
+                Application.Current.Shutdown();
             }
-        }
-
-        private void BtnHome_Click(object sender, RoutedEventArgs e)
-        {
-            NavigateToHome();
-        }
-
-        private void BtnBuildings_Click(object sender, RoutedEventArgs e)
-        {
-            NavigateToBuildings();
-        }
-
-        private void BtnApartments_Click(object sender, RoutedEventArgs e)
-        {
-            NavigateToApartments();
-        }
-
-        private void BtnServiceRequests_Click(object sender, RoutedEventArgs e)
-        {
-            NavigateToServiceRequests();
-        }
-
-        private void BtnRequestHistory_Click(object sender, RoutedEventArgs e)
-        {
-            NavigateToRequestHistory();
         }
     }
 }
