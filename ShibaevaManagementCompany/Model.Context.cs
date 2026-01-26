@@ -1,17 +1,16 @@
-﻿namespace ShibaevaManagementCompany
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Runtime.Remoting.Contexts;
 
-    public partial class ShibaevaManagementCompanyEntities : DbContext
+namespace ShibaevaManagementCompany
+{
+    public class ShibaevaManagementCompanyEntities : DbContext
     {
         public ShibaevaManagementCompanyEntities()
             : base("name=ShibaevaManagementCompanyEntities")
         {
-            // Инициализация конфигурации
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.ProxyCreationEnabled = false;
         }
 
         private static ShibaevaManagementCompanyEntities _context;
@@ -23,20 +22,11 @@
             return _context;
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            // Для Database First оставляем исключение
-            throw new UnintentionalCodeFirstException();
-        }
-
-        public virtual DbSet<Apartments> Apartments { get; set; }
-        public virtual DbSet<Buildings> Buildings { get; set; }
-        public virtual DbSet<Debts> Debts { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Payments> Payments { get; set; }
-        public virtual DbSet<ServiceRequests> ServiceRequests { get; set; }
-
-        // Удалите sysdiagrams если у вас его нет в базе
-        // public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<Apartments> Apartments { get; set; }
+        public DbSet<Buildings> Buildings { get; set; }
+        public DbSet<Debts> Debts { get; set; }
+        public DbSet<Employees> Employees { get; set; }
+        public DbSet<Payments> Payments { get; set; }
+        public DbSet<ServiceRequests> ServiceRequests { get; set; }
     }
 }

@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Data.Entity; // Добавьте эту директиву для Include()
+using ShibaevaManagementCompany; // Добавьте эту директиву для контекста и моделей
 
 namespace ShibaevaManagementCompany.Pages
 {
@@ -31,7 +33,7 @@ namespace ShibaevaManagementCompany.Pages
         {
             try
             {
-                using (var db = new DatabaseContext())
+                using (var db = new ShibaevaManagementCompanyEntities()) // Используйте правильное имя
                 {
                     var buildings = db.Buildings
                         .OrderBy(b => b.Address)
@@ -44,7 +46,7 @@ namespace ShibaevaManagementCompany.Pages
 
                     if (filteredBuildingId.HasValue)
                     {
-                        foreach (Building item in cbBuildingFilter.Items)
+                        foreach (Buildings item in cbBuildingFilter.Items) // Buildings, а не Building
                         {
                             if (item.BuildingID == filteredBuildingId.Value)
                             {
@@ -68,9 +70,9 @@ namespace ShibaevaManagementCompany.Pages
         {
             try
             {
-                using (var db = new DatabaseContext())
+                using (var db = new ShibaevaManagementCompanyEntities()) // Используйте правильное имя
                 {
-                    IQueryable<Apartment> query = db.Apartments.Include("Buildings");
+                    IQueryable<Apartments> query = db.Apartments.Include(a => a.Buildings); // Исправлено Include
 
                     if (filteredBuildingId.HasValue)
                     {
@@ -98,7 +100,7 @@ namespace ShibaevaManagementCompany.Pages
         {
             if (filteredBuildingId.HasValue)
             {
-                using (var db = new DatabaseContext())
+                using (var db = new ShibaevaManagementCompanyEntities()) // Используйте правильное имя
                 {
                     var building = db.Buildings.Find(filteredBuildingId.Value);
                     if (building != null)
@@ -117,7 +119,7 @@ namespace ShibaevaManagementCompany.Pages
         {
             if (dgApartments.ItemsSource is System.Collections.IList items)
             {
-                var filtered = items.Cast<Apartment>()
+                var filtered = items.Cast<Apartments>() // Apartments, а не Apartment
                     .Where(a => a.OwnerName.ToLower().Contains(txtSearch.Text.ToLower()) ||
                                a.PhoneNumber.Contains(txtSearch.Text) ||
                                a.ApartmentNumber.ToString().Contains(txtSearch.Text) ||
@@ -135,7 +137,7 @@ namespace ShibaevaManagementCompany.Pages
 
         private void CbBuildingFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbBuildingFilter.SelectedItem is Building selectedBuilding)
+            if (cbBuildingFilter.SelectedItem is Buildings selectedBuilding) // Buildings, а не Building
             {
                 filteredBuildingId = selectedBuilding.BuildingID;
             }
